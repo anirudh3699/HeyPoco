@@ -40,9 +40,7 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  const { data: { user }, error } = await supabase.auth.getUser();
-
-  console.log("[middleware]", pathname, "user:", user?.email ?? null, "error:", error?.message ?? null);
+  const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
     const loginUrl = new URL("/login", request.url);
